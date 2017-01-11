@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+   console.log('hello');
+
+    // Interpolated
+   console.log('test %s', 'booo!');
+
+    // Styled
+   console.log('%cstylish text', 'font-size:24px; background:lightgray; color: blue');
+
+    // warning!
+   console.warn('oh noes!');
+
+    // Error :|
+   console.error('f*ck!!');
+
+    // Info
+   console.info('this is some interesting info');
+
+    // Testing
+   const p = document.querySelector('p');
+   console.assert(p.classList.contains('ouch'), 'Error fundamental!');
+
+    // clearing
+   console.clear();
+
+    // Viewing DOM Elements
+   console.log(p);
+   console.dir(p);
+
+    // Grouping together
+   dogs.forEach(dog => {
+       console.groupCollapsed(`${dog.name}`);
+       console.log(`Este es ${dog.name}`);
+       console.log(`${dog.name} tiene ${dog.age} años`);
+       console.log(`${dog.name} tiene ${dog.age * 7} años de perro`);
+       console.groupEnd(`${dog.name}`);
+   });
+
+    // counting
+   console.count('Tomás');
+   console.count('Max');
+   console.count('Max');
+   console.count('Max');
+   console.count('Max');
+   console.count('Max');
+   console.count('Max');
+   console.count('Tomás');
+   console.count('Tomás');
+   console.count('Tomás');
+   console.count('Tomás');
+   console.count('Tomás');
+
+    // timing
+   console.time('obteniendo datos');
+   fetch('https://api.github.com/users/ricardochavezt').then(data => data.json()).then(data => {
+       console.timeEnd('obteniendo datos');
+       console.log(data);
+   });
+
+   // and last, console.table
+   console.table(dogs);
+
+  </script>
+</body>
+</html>
