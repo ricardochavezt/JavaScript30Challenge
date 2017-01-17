@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+   let age1 = 100;
+   let age2 = age1;
+   console.log(age1, age2);
+   age2 = 200;
+   console.log(age1, age2);
+
+   let string1 = "Ricardo";
+   let string2 = string1;
+   console.log(string1, string2);
+   string2 = "Chávez";
+   console.log(string1, string2);
+
+    // Let's say we have an array
+    const players = ['Ricardo', 'Miguel', 'Carolina', 'Tomás'];
+
+    // and we want to make a copy of it.
+
+    // You might think we can just do something like this:
+
+    // however what happens when we update that array?
+
+    // now here is the problem!
+
+    // oh no - we have edited the original array too!
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+
+    // one day
+
+    // or create a new array and concat the old one in
+   const team2 = [].concat(players);
+   team2[3] = 'Valentina';
+
+    // or use the new ES6 Spread
+   const team3 = [...players];
+   team3[3] = 'Sofía';
+
+   // or use Array.from
+   const team4 = Array.from(players);
+   team4[3] = 'Carlos';
+
+    // now when we update it, the original one isn't changed
+   console.log(players, team2, team3, team4);
+
+    // The same thing goes for objects, let's say we have a person object
+   const person = {
+       name: 'Ricardo',
+       age: 32
+   };
+
+    // with Objects
+
+    // and think we make a copy:
+
+    // how do we take a copy instead?
+   const person2 = Object.assign({}, person, {number: 99, age: 40});
+   console.log(person, person2);
+
+    // We will hopefully soon see the object ...spread
+   // but for the time being, it doesn't work
+   /* const person3 = {...person};*/
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+   // HOWEVER here's a poor man's deepClone, absolutely *not* recommended
+   const developer = {
+       name: 'Ricardo',
+       age: 32,
+       social: {
+           twitter: '@ricardohavezt',
+           github: 'ricardochavezt'
+       }
+   };
+   const developer2 = JSON.parse(JSON.stringify(developer));
+   developer2.social['instagram'] = 'ricardochavezt';
+
+   console.log(developer, developer2);
+
+  </script>
+
+</body>
+</html>
